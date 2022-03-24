@@ -1,6 +1,9 @@
 #pragma once
 #include <windows.h>
 
+using namespace std;
+
+
 class Console {
 
 private:
@@ -20,4 +23,3 @@ public:
 
     static void setup();
 };
-

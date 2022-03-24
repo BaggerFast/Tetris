@@ -1,4 +1,7 @@
 #include "Tetromino.h"
+#include <iostream>
+#include <conio.h>
+
 
 Tetromino::Tetromino(vector<vector<bool>> figure, COORD coord)
 {
@@ -13,7 +16,8 @@ bool Tetromino::canFall(vector<vector<int>> field)
         tmpX = coord_.X;
         for (int x = 0; x < figure_[y].size(); ++x) {
             try {
-                field.at(tmpY).at(tmpX);
+                if (field.at(tmpY).at(tmpX) == 2 && figure_[y][x] == 1)
+                    return false;
             }
             catch (out_of_range) {
                 vector<bool> emptyLine(figure_[y].size(), 0);
@@ -34,14 +38,21 @@ bool Tetromino::canRotate()
     return isFallen_ != true;
 }
 
-bool Tetromino::isFallen()
-{
-    return isFallen_;
-}
+bool Tetromino::isFallen() { return isFallen_; }
 
-void Tetromino::fall(vector<vector<int>>& field) {
-    if (!canFall(field)) {
+void Tetromino::fall(vector<vector<int>> &field) {
+    if (canFall(field) == false) {
         isFallen_ = true;
+        int tmpY = coord_.Y, tmpX = 0;
+        for (int y = 0; y < figure_.size(); ++y) {
+            tmpX = coord_.X;
+            for (int x = 0; x < figure_[y].size(); ++x) {
+                if (figure_[y][x] == Unit::Falling)
+                    field[tmpY][tmpX] = Unit::Fallen;
+                tmpX++;
+            }
+            tmpY++;
+        }
         return;
     }
     process_draw(field, true);
@@ -63,18 +74,19 @@ void Tetromino::move()
 {
 }
 
-void Tetromino::process_draw(vector<vector<int>>& field, bool undraw)
+void Tetromino::process_draw(vector<vector<int>> &field, bool undraw)
 {
     int tmpY = coord_.Y, tmpX = 0;
     for (int y = 0; y < figure_.size(); ++y) {
         tmpX = coord_.X;
         for (int x = 0; x < figure_[y].size(); ++x) {
-            if (figure_[y][x] == 1)
+            if (figure_[y][x] == 1 && field[tmpY][tmpX] != Unit::Fallen)
                 field[tmpY][tmpX] = undraw ? 0 : figure_[y][x];
             tmpX++;
         }
         tmpY++;
     }
+  
 }
 
 bool parseKeys(vector<int> keys, int key) {
@@ -95,8 +107,12 @@ void Tetromino::process_logic() {
         int key = _getch();
         if (parseKeys(SPACE, key))
             rotate();
-        else if (parseKeys(SPACE, key))
-            rotate();
+        else if (parseKeys(A, key))
+            coord_.X -= 1;
+        else if (parseKeys(D, key))
+            coord_.X += 1;
+        else if (parseKeys(S, key))
+            coord_.Y += 1;
 
     }
 }

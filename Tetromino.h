@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <conio.h>
+#include <windows.h>
+#include "GameBoard.h"
+
 
 using namespace std;
 
