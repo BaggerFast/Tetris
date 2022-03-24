@@ -303,8 +303,7 @@ node_modules/
 *.dsp
 
 # Visual Studio 6 technical files
-*.ncb
-*.aps
+*.nc
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts

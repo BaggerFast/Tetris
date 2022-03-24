@@ -2,20 +2,28 @@
 #include <iostream>
 #include <vector>
 #include <conio.h>
-#include <windows.h>
-
 
 using namespace std;
 
 class Tetromino
 {
 private:
-	int rotate_ = 0;
+
 	vector<vector<bool>> figure_;
 	COORD coord_;
+	
+	int rotate_ = 0;
+
+	bool isFallen_ = false;
+
+	bool canFall(vector<vector<int>>);
+
+	bool canRotate();
 
 public:
 	Tetromino(vector<vector<bool>>, COORD);
+
+	bool isFallen();
 
 	void fall(vector<vector<int>>&);
 	
