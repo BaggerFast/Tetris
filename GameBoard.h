@@ -1,6 +1,7 @@
 #pragma once
-#include <iostream>
+#include <windows.h>
 #include <vector>
+
 
 using namespace std;
 
@@ -18,7 +19,6 @@ enum Unit {
     Fallen,
 };
 
-
 class GameBoard
 {
 private:
@@ -32,6 +32,10 @@ public:
     static inline vector<vector<int>> field = vector<vector<int>>(HEIGHT_, vector<int>(WIDTH_, Unit::Space));
 
     static void draw();
+
+    static void processLogic();
+
+    static void checkLine();
 
 };
 

@@ -11,12 +11,10 @@ private:
 
 	vector<vector<bool>> figure_;
 	COORD coord_;
-	
+
 	int rotate_ = 0;
 
 	bool isFallen_ = false;
-
-	bool canFall(vector<vector<int>>);
 
 	bool canRotate();
 
@@ -26,13 +24,15 @@ public:
 	bool isFallen();
 
 	void fall(vector<vector<int>>&);
-	
-	void process_draw(vector<vector<int>>&, bool = false);
+
+	void process_draw(vector<vector<int>>&, int = Unit::Falling);
 
 	void rotate();
-	
+
 	void move();
 
-	void process_logic();
+	void process_logic(vector<vector<int>>&);
+
+	bool checkInsert(int, int, vector<vector<int>>&);
 };
 
