@@ -2,12 +2,13 @@
 
 #include "MainScene.h"
 #include "Console.h"
+#include "MenuScene.h"
 
 
 int main()
 {
     Console::setup();
-    MainScene main = MainScene(15, 20);
-    main.processLogic();
+    MenuScene menu = MenuScene(10, 20);
+    menu.processLogic();
     return 0;
 }

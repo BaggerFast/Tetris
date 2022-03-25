@@ -6,29 +6,29 @@
 using namespace std;
 
 
-
-
 class Field
 {
 private:
-    static const int WIDTH_ = 10, HEIGHT_ = 20;
 
-    static inline bool gameOver_ = false;
+    bool gameOver_ = false;
 
-    static void drawLine();
-
-    static void drawPoint(int);
+    vector<vector<int>> field_;
     
+    void drawPoint_(int);
+
+    void drawFieldLine_();
+
 public:
-    static inline vector<vector<int>> field = vector<vector<int>>(HEIGHT_, vector<int>(WIDTH_, Unit::Space));
 
-    static void draw();
+    Field(vector<vector<int>>&);
 
-    static void processLogic();
+    void draw();
 
-    static int deleteFullLines();
+    void processLogic();
 
-    static bool gameOver();
+    int deleteFullLines();
+
+    bool gameOver();
 
 };
 

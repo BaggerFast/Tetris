@@ -64,10 +64,6 @@ void Tetromino::rotate(vector<vector<int>> & field)
         figure_ = tmp;   
 }
 
-bool parseKeys(vector<int> keys, int key) {
-    return find(keys.begin(), keys.end(), key) != keys.end();
-}
-
 bool Tetromino::checkInsert(int x, int y, vector<vector<int>> & field)
 {   
     int tmpY = y;
@@ -107,13 +103,13 @@ void Tetromino::process_logic(vector<vector<int>>& field) {
     fall(field);
     if (_kbhit() && isFallen_ != true) {
         int key = _getch();
-        if (parseKeys(Keyboard::SPACE, key))
+        if (Keyboard::parseKeys(Keyboard::SPACE, key))
             rotate(field);
-        else if (parseKeys(Keyboard::A, key) && checkInsert(coord_.X - 1, coord_.Y, field))
+        else if (Keyboard::parseKeys(Keyboard::A, key) && checkInsert(coord_.X - 1, coord_.Y, field))
             coord_.X -= 1;
-        else if (parseKeys(Keyboard::D, key) && checkInsert(coord_.X + 1, coord_.Y, field))
+        else if (Keyboard::parseKeys(Keyboard::D, key) && checkInsert(coord_.X + 1, coord_.Y, field))
             coord_.X += 1;
-        else if (parseKeys(Keyboard::S, key) && checkInsert(coord_.X, coord_.Y + 1, field))
+        else if (Keyboard::parseKeys(Keyboard::S, key) && checkInsert(coord_.X, coord_.Y + 1, field))
             coord_.Y += 1;
     }
 }

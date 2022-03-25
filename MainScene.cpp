@@ -77,16 +77,17 @@ void MainScene::processLogic() {
        Tetrominos::U,
     };
     srand(time(0));
-    while (!Field::gameOver()) {
+    Field gameField = Field(field_);
+    while (!gameField.gameOver()) {
         Tetromino figure = Tetromino(figures[rand() % figures.size()]);
         while (!figure.isFallen()) {
-            figure.process_logic(Field::field);
-            figure.process_draw(Field::field);
+            figure.process_logic(field_);
+            figure.process_draw(field_);
             processDraw();
-            Field::draw();
+            gameField.draw();
             Sleep(125);
         }
-        score_ += Field::deleteFullLines();
+        score_ += gameField.deleteFullLines();
     }
 }
 
