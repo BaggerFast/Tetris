@@ -142,14 +142,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="ColorManager.cpp" />
     <ClCompile Include="Console.cpp" />
-    <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="Field.cpp" />
+    <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="tetris.cpp" />
     <ClCompile Include="Tetromino.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="ColorManager.h" />
     <ClInclude Include="Console.h" />
-    <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="Field.h" />
+    <ClInclude Include="MainScene.h" />
     <ClInclude Include="Tetromino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

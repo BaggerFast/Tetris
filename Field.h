@@ -1,28 +1,19 @@
 #pragma once
 #include <windows.h>
 #include <vector>
-
+#include "Constants.h"
 
 using namespace std;
 
 
-struct Block {
-    static const char
-        FIELD = char(219),
-        TETROMINO = char(254),
-        SPACE = char(255);
-};
 
-enum Unit { 
-    Space, 
-    Falling,
-    Fallen,
-};
 
-class GameBoard
+class Field
 {
 private:
     static const int WIDTH_ = 10, HEIGHT_ = 20;
+
+    static inline bool gameOver_ = false;
 
     static void drawLine();
 
@@ -35,7 +26,9 @@ public:
 
     static void processLogic();
 
-    static void checkLine();
+    static int deleteFullLines();
+
+    static bool gameOver();
 
 };
 

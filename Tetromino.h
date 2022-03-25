@@ -1,7 +1,6 @@
 #pragma once
 #include <windows.h>
-#include "GameBoard.h"
-
+#include "Field.h"
 
 using namespace std;
 
@@ -12,14 +11,14 @@ private:
 	vector<vector<bool>> figure_;
 	COORD coord_;
 
-	int rotate_ = 0;
-
 	bool isFallen_ = false;
 
-	bool canRotate();
+	vector<vector<bool>> getNextRotate();
 
 public:
 	Tetromino(vector<vector<bool>>, COORD);
+
+	Tetromino(vector<vector<bool>>);
 
 	bool isFallen();
 
@@ -27,9 +26,7 @@ public:
 
 	void process_draw(vector<vector<int>>&, int = Unit::Falling);
 
-	void rotate();
-
-	void move();
+	void rotate(vector<vector<int>>&);
 
 	void process_logic(vector<vector<int>>&);
 

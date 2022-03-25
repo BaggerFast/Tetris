@@ -7,7 +7,7 @@ using namespace std;
 class Console {
 
 private:
-    static inline HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+    static inline HANDLE console_ = GetStdHandle(STD_OUTPUT_HANDLE);
 
 public:
 
@@ -19,7 +19,9 @@ public:
 
     static void setFont();
 
-    static void clear();
+    static void setColor(int);
 
     static void setup();
+
+
 };

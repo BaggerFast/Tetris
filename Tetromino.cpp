@@ -1,20 +1,49 @@
 #include "Tetromino.h"
 #include <iostream>
 #include <conio.h>
+#include "ColorManager.h"
+#include "Constants.h"
 
+
+vector<vector<bool>> Tetromino::getNextRotate()
+{
+    vector<vector<bool>> newFigureRotate;
+    for (int y = 0; y < figure_[0].size(); ++y) {
+        vector<bool> tmp;
+        for (int x = 0; x < figure_.size(); ++x) {
+            tmp.insert(tmp.cbegin(), figure_[x][y]);
+        }
+        newFigureRotate.push_back(tmp);
+    }
+    return newFigureRotate;
+}
 
 Tetromino::Tetromino(vector<vector<bool>> figure, COORD coord)
 {
     figure_ = figure;
     coord_ = coord;
+    ColorManager::getRandom();
 }
 
-bool Tetromino::canRotate()
+Tetromino::Tetromino(vector<vector<bool>> figure)
 {
-    return isFallen_ != true;
+    figure_ = figure;
+    srand(time(NULL));
+    int rotate = rand() % 4;
+    for (int i = 0; i < rotate; ++i) {
+        figure_ = getNextRotate();
+    }
+    coord_.X = rand() % 11;
+    if (coord_.X > 10-figure_[0].size()-1)
+        coord_.X = 10 - figure_[0].size() - 1;
+    coord_.Y = 0;
+    ColorManager::getRandom();
+
 }
 
-bool Tetromino::isFallen() { return isFallen_; }
+bool Tetromino::isFallen() { 
+    return isFallen_; 
+}
 
 void Tetromino::fall(vector<vector<int>> &field) {
     if (checkInsert(coord_.X, coord_.Y+1, field) == false) {
@@ -24,66 +53,19 @@ void Tetromino::fall(vector<vector<int>> &field) {
     }
     process_draw(field, Unit::Space);
     coord_.Y += 1;
-}
+}  
 
-void Tetromino::process_draw(vector<vector<int>>& field, int tag)
+void Tetromino::rotate(vector<vector<int>> & field)
 {
-    int tmpY = coord_.Y, tmpX = 0;
-    for (int y = 0; y < figure_.size(); ++y) {
-        tmpX = coord_.X;
-        for (int x = 0; x < figure_[y].size(); ++x) {
-            if (figure_[y][x] == Unit::Falling && field[tmpY][tmpX] != Unit::Fallen)
-                field[tmpY][tmpX] = tag;
-            tmpX++;
-        }
-        tmpY++;
-    }
-}
-
-void Tetromino::rotate()
-{
-    if (canRotate() != true)
-        return;
-    vector<vector<bool>> tmp;
-    for (int y = 0; y < figure_[0].size(); ++y) {
-        vector<bool> tmp1;
-        for (int x = 0; x < figure_.size(); ++x) {  
-            tmp1.insert(tmp1.cbegin(), figure_[x][y]);
-        }
-        tmp.push_back(tmp1);
-    }
-    figure_ = tmp;
-}
-
-void Tetromino::move()
-{
+    vector<vector<bool>> tmp = figure_;
+    figure_ = getNextRotate();
+   
+    if (checkInsert(coord_.X, coord_.Y, field) == false)
+        figure_ = tmp;   
 }
 
 bool parseKeys(vector<int> keys, int key) {
     return find(keys.begin(), keys.end(), key) != keys.end();
-}
-
-void Tetromino::process_logic(vector<vector<int>> & field) {
-
-
-    vector<int>
-        W = { 119, 246 },
-        A = { 97, 244 },
-        S = { 115, 251 },
-        D = { 100, 226 },
-        SPACE = { 32 };
-
-    if (_kbhit()) {
-        int key = _getch();
-        if (parseKeys(SPACE, key))
-            rotate();
-        else if (parseKeys(A, key) && checkInsert(coord_.X-1, coord_.Y, field))
-            coord_.X -= 1;
-        else if (parseKeys(D, key) && checkInsert(coord_.X+1, coord_.Y, field))
-            coord_.X += 1;
-        else if (parseKeys(S, key) && checkInsert(coord_.X, coord_.Y+1, field))
-            coord_.Y += 1;
-    }
 }
 
 bool Tetromino::checkInsert(int x, int y, vector<vector<int>> & field)
@@ -105,4 +87,33 @@ bool Tetromino::checkInsert(int x, int y, vector<vector<int>> & field)
         tmpY++;
     }
     return true;
+}
+
+void Tetromino::process_draw(vector<vector<int>>& field, int tag)
+{
+    int tmpY = coord_.Y;
+    for (int y = 0; y < figure_.size(); ++y) {
+        int tmpX = coord_.X;
+        for (int x = 0; x < figure_[y].size(); ++x) {
+            if (figure_[y][x] == Unit::Falling && field[tmpY][tmpX] != Unit::Fallen)
+                field[tmpY][tmpX] = tag;
+            tmpX++;
+        }
+        tmpY++;
+    }
+}
+
+void Tetromino::process_logic(vector<vector<int>>& field) {
+    fall(field);
+    if (_kbhit() && isFallen_ != true) {
+        int key = _getch();
+        if (parseKeys(Keyboard::SPACE, key))
+            rotate(field);
+        else if (parseKeys(Keyboard::A, key) && checkInsert(coord_.X - 1, coord_.Y, field))
+            coord_.X -= 1;
+        else if (parseKeys(Keyboard::D, key) && checkInsert(coord_.X + 1, coord_.Y, field))
+            coord_.X += 1;
+        else if (parseKeys(Keyboard::S, key) && checkInsert(coord_.X, coord_.Y + 1, field))
+            coord_.Y += 1;
+    }
 }

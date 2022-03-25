@@ -3,9 +3,9 @@
 void Console::offCursorVisability()
 {
     CONSOLE_CURSOR_INFO structCurInf;
-    GetConsoleCursorInfo(console, &structCurInf);
+    GetConsoleCursorInfo(console_, &structCurInf);
     structCurInf.bVisible = false;
-    SetConsoleCursorInfo(console, &structCurInf);
+    SetConsoleCursorInfo(console_, &structCurInf);
 }
 
 void Console::setCursorPos(int x, int y)
@@ -13,12 +13,12 @@ void Console::setCursorPos(int x, int y)
     COORD coord;
     coord.X = x;
     coord.Y = y;
-    SetConsoleCursorPosition(console, coord);
+    SetConsoleCursorPosition(console_, coord);
 }
 
 void Console::setCursorPos(COORD coord)
 {
-    SetConsoleCursorPosition(console, coord);
+    SetConsoleCursorPosition(console_, coord);
 }
 
 void Console::setFont()
@@ -28,12 +28,12 @@ void Console::setFont()
     text.dwFontSize.Y = 36;
     #pragma warning(suppress : 4996)
     wcscpy(text.FaceName, L"Consolas");
-    SetCurrentConsoleFontEx(console, FALSE, &text);
+    SetCurrentConsoleFontEx(console_, FALSE, &text);
 }
 
-void Console::clear()
+void Console::setColor(int color) 
 {
-    system("cls");
+    SetConsoleTextAttribute(console_, color);
 }
 
 void Console::setup()
@@ -42,7 +42,6 @@ void Console::setup()
     offCursorVisability();
     setFont();
     system("mode con cols=40 lines=27");
-    clear();
 }
 
 
