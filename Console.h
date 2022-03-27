@@ -21,6 +21,8 @@ public:
 
     static void setColor(int);
 
+    static void flash(int count);
+    
     static void setup();
 
 

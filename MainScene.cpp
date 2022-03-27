@@ -3,9 +3,7 @@
 #include "Field.h"
 #include "Console.h"
 #include "ColorManager.h"
-
 using namespace std;
-
 
 struct Tetrominos {
     static inline vector<vector<bool>>
@@ -54,16 +52,57 @@ struct Tetrominos {
         };
 };
 
-void MainScene::processDraw()
+#pragma region Private Methods
+
+#pragma region Draw Methods
+
+void MainScene::processDraw_()
 {
     Console::setCursorPos(1, 0);
     Console::setColor(ColorManager::Color::Yellow);
     cout << "Score: " << score_;
-    drawControl_();
+    Console::setCursorPos(coord_);
 }
 
-void MainScene::processLogic() {
-    system("cls");
+void MainScene::drawFieldPoint_(int point)
+{
+    switch (point) {
+        case Unit::Space:
+            cout << Block::SPACE;
+            break;
+        case Unit::Falling:
+            Console::setColor(ColorManager::current);
+            cout << Block::TETROMINO;
+            break;
+        case Unit::Fallen:
+            Console::setColor(ColorManager::previous);
+            cout << Block::TETROMINO;
+            break;
+        }
+    cout << Block::SPACE;
+}
+
+void MainScene::drawControl_() {
+    string names[] = {
+    "CONTROL",
+    "s - down",
+    "a - left",
+    "d - right",
+    "space - rotate"
+    };
+    int y = 5, x = 24;
+
+    Console::setColor(ColorManager::Color::Yellow);
+    for (int i = 0; i < 5; ++i) {
+        Console::setCursorPos(x, y);
+        cout << names[i];
+        y++;
+    }
+}
+
+#pragma endregion
+
+void MainScene::processLogic_() {
     vector<vector<vector<bool>>> figures = {
        Tetrominos::T,
        Tetrominos::Q,
@@ -82,29 +121,13 @@ void MainScene::processLogic() {
         Tetromino figure = Tetromino(figures[rand() % figures.size()]);
         while (!figure.isFallen()) {
             figure.process_logic(field_);
-            figure.process_draw(field_);
-            processDraw();
-            gameField.draw();
+            draw_();
             Sleep(125);
         }
         score_ += gameField.deleteFullLines();
     }
+    Sleep(2000);
+    Console::flash(3);
 }
 
-void MainScene::drawControl_() {
-    string names[] = {
-    "CONTROL",
-    "s - down",
-    "a - left",
-    "d - right",
-    "space - rotate"
-    };
-    int y = 5;
-
-    Console::setColor(ColorManager::Color::Yellow);
-    for (int i = 0; i < 5; ++i) {
-        Console::setCursorPos(24, y);
-        cout << names[i];
-        y++;
-    }
-}
+#pragma endregion

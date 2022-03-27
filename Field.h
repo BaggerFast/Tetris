@@ -8,27 +8,31 @@ using namespace std;
 
 class Field
 {
+
+#pragma region Private
+
 private:
 
     bool gameOver_ = false;
 
     vector<vector<int>> field_;
     
-    void drawPoint_(int);
+#pragma endregion
 
-    void drawFieldLine_();
+#pragma region Public
 
 public:
 
-    Field(vector<vector<int>>&);
-
-    void draw();
+    Field(vector<vector<int>> &);
 
     void processLogic();
 
     int deleteFullLines();
 
     bool gameOver();
+
+
+#pragma endregion
 
 };
 

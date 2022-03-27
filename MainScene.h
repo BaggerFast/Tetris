@@ -1,23 +1,37 @@
 #pragma once
 #include "BaseScene.h"
 
-
 class MainScene : public BaseScene
 {
+
+#pragma region Private
 
 private:
 	int score_ = 0;
 
 	void drawControl_();
 
+	void drawFieldPoint_(int point);
+
+	void processDraw_();
+
+	void processLogic_();
+
+#pragma endregion
+
+#pragma region Public
+
 public:
 
-	MainScene(int x, int y) : BaseScene(x, y) {};
+	#pragma region Constructors
 
-	void processDraw();
+	MainScene(int width, int height, int x = 0, int y = 0) : BaseScene(width, height, x, y) {};
 
-	void processLogic();
+	MainScene(int width, int height, COORD coord) : BaseScene(width, height, coord) {};
 
-	
+	#pragma endregion 
+
+#pragma endregion
+
 };
 

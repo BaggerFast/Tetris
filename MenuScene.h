@@ -3,23 +3,38 @@
 
 class MenuScene : public BaseScene
 {
+
+#pragma region Private
+
 private:
-	COORD coord_;
+	
+	COORD cursorCoord_;
+
 	void drawControl_();
 
-	void drawFieldLine_();
+	void drawFieldPoint_(int point);
 
-	void drawPoint_(int point);
+	void processDraw_();
+
+	void processLogic_();
+
+	void parseKeyboard_();
+
+#pragma endregion
+
+#pragma region Public
 
 public:
 
-	MenuScene(int x, int y);
+	#pragma region Constructors
 
-	void processDraw();
+		MenuScene(int width, int height, int x = 0, int y = 0) : BaseScene(width, height, x, y) {};
 
-	void processLogic();
+		MenuScene(int width, int height, COORD coord) : BaseScene(width, height, coord) {};
 
-	void parseKeyboard();
+	#pragma endregion 
+
+#pragma endregion
 
 };
 

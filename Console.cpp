@@ -8,6 +8,15 @@ void Console::offCursorVisability()
     SetConsoleCursorInfo(console_, &structCurInf);
 }
 
+void Console::flash(int count) {
+    for (int i = 0; i < count; i++) {
+        system("color 20");
+        Sleep(100);
+        system("color 02");
+        Sleep(100);
+    }
+}
+
 void Console::setCursorPos(int x, int y)
 {
     COORD coord;

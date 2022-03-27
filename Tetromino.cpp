@@ -112,4 +112,5 @@ void Tetromino::process_logic(vector<vector<int>>& field) {
         else if (Keyboard::parseKeys(Keyboard::S, key) && checkInsert(coord_.X, coord_.Y + 1, field))
             coord_.Y += 1;
     }
+    process_draw(field, Unit::Falling);
 }
