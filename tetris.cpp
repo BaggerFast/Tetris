@@ -7,6 +7,7 @@
 
 int main()
 {
+
     Console::setup();
     MenuScene menu = MenuScene(10, 20, 0, 3);
     menu.run();

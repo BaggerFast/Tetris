@@ -127,7 +127,16 @@ void MainScene::processLogic_() {
         score_ += gameField.deleteFullLines();
     }
     Sleep(2000);
-    Console::flash(3);
+    flash_(3, 100);
+}
+
+void MainScene::flash_(int count, int timer) {
+    for (int i = 0; i < count; i++) {
+        system("color 20");
+        Sleep(timer);
+        system("color 02");
+        Sleep(timer);
+    }
 }
 
 #pragma endregion

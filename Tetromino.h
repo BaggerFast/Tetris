@@ -6,7 +6,7 @@ using namespace std;
 
 class Tetromino
 {
--
+
 #pragma region Private
 
 private:

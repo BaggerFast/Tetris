@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
 
-
+/// <summary>
+/// Symbols for Display
+/// </summary>
 struct Block {
     static const char
         FIELD = char(219),
@@ -10,21 +12,12 @@ struct Block {
         CURSOR = char(248);
 };
 
+/// <summary>
+/// Abstract Unit inside the field
+/// </summary>
 enum Unit {
     Space,
     Falling,
     Fallen,
     Cursor,
-};
-
-class Keyboard {
-public:
-    static inline std::vector<int>
-        W = { 119, 246 },
-        A = { 97, 244 },
-        S = { 115, 251 },
-        D = { 100, 226 },
-        SPACE = { 32 };
-
-    static bool parseKeys(std::vector<int>, int);
 };

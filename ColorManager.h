@@ -5,6 +5,7 @@ class ColorManager
 {
 
 public:
+
     enum Color {
         Black = 0,
         Blue = 1,

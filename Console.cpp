@@ -1,21 +1,8 @@
 #include "Console.h"
 
-void Console::offCursorVisability()
-{
-    CONSOLE_CURSOR_INFO structCurInf;
-    GetConsoleCursorInfo(console_, &structCurInf);
-    structCurInf.bVisible = false;
-    SetConsoleCursorInfo(console_, &structCurInf);
-}
+#pragma region Public Methods
 
-void Console::flash(int count) {
-    for (int i = 0; i < count; i++) {
-        system("color 20");
-        Sleep(100);
-        system("color 02");
-        Sleep(100);
-    }
-}
+#pragma region setCursorPos
 
 void Console::setCursorPos(int x, int y)
 {
@@ -28,6 +15,16 @@ void Console::setCursorPos(int x, int y)
 void Console::setCursorPos(COORD coord)
 {
     SetConsoleCursorPosition(console_, coord);
+}
+
+#pragma endregion
+
+void Console::offCursorVisability()
+{
+    CONSOLE_CURSOR_INFO structCurInf;
+    GetConsoleCursorInfo(console_, &structCurInf);
+    structCurInf.bVisible = false;
+    SetConsoleCursorInfo(console_, &structCurInf);
 }
 
 void Console::setFont()
@@ -48,9 +45,9 @@ void Console::setColor(int color)
 void Console::setup()
 {
     SetConsoleCP(1251);
+    system("mode con cols=40 lines=27");
     offCursorVisability();
     setFont();
-    system("mode con cols=40 lines=27");
 }
 
-
+#pragma endregion

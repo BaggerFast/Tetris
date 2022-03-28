@@ -11,11 +11,13 @@ private:
 
 	void drawControl_();
 
-	void drawFieldPoint_(int point);
+	void drawFieldPoint_(int);
 
 	void processDraw_();
 
 	void processLogic_();
+
+	void flash_(int, int);
 
 #pragma endregion
 
