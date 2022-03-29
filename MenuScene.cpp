@@ -1,9 +1,9 @@
 #include "MenuScene.h"
-#include "ColorManager.h"
 #include "Console.h"
 #include <conio.h>
 #include "Constants.h"
 #include "MainScene.h"
+#include "Keyboard.h"
 
 #pragma region Needs Refactor
 void print_word(string word, int cord_x, int cord_y, vector<vector<int>>& field) {
@@ -40,7 +40,7 @@ void MenuScene::drawControl_()
     };
     int y = 4;
 
-    Console::setColor(ColorManager::Color::Yellow);
+    Console::setColor(Color::Yellow);
     for (int i = 0; i < 4; ++i) {
         Console::setCursorPos(24, y);
         cout << names[i];
@@ -55,16 +55,15 @@ void MenuScene::drawFieldPoint_(int point)
             cout << Block::SPACE;
             break;
         case Unit::Falling:
-            Console::setColor(ColorManager::LightBlue);
+            Console::setColor(Color::LightBlue);
             cout << Block::TETROMINO;
             break;
         case Unit::Fallen:
-            ColorManager::getRandom();
-            Console::setColor(ColorManager::current);
+            Console::setColor(getRandomColor());
             cout << Block::TETROMINO;
             break;
         default:
-            Console::setColor(ColorManager::White);
+            Console::setColor(Color::White);
             cout << char(point);
             break;
         }
@@ -74,7 +73,7 @@ void MenuScene::drawFieldPoint_(int point)
 void MenuScene::processDraw_()
 {
     Console::setCursorPos(coord_);
-    Console::setColor(ColorManager::Color::Green);
+    Console::setColor(Color::Green);
     print_word("START", 2, 7, field_);
     print_word("EXIT", 2, 9, field_);
     //T

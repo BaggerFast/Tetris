@@ -1,4 +1,4 @@
-﻿// tetris.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// tetris.cpp : This file contains the "main" function. This is where program execution begins and ends
 
 #include "MainScene.h"
 #include "Console.h"
@@ -7,7 +7,6 @@
 
 int main()
 {
-
     Console::setup();
     MenuScene menu = MenuScene(10, 20, 0, 3);
     menu.run();

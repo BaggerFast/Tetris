@@ -2,7 +2,7 @@
 #include "Tetromino.h"
 #include "Field.h"
 #include "Console.h"
-#include "ColorManager.h"
+
 using namespace std;
 
 struct Tetrominos {
@@ -59,7 +59,7 @@ struct Tetrominos {
 void MainScene::processDraw_()
 {
     Console::setCursorPos(1, 0);
-    Console::setColor(ColorManager::Color::Yellow);
+    Console::setColor(Color::Yellow);
     cout << "Score: " << score_;
     Console::setCursorPos(coord_);
 }
@@ -71,11 +71,11 @@ void MainScene::drawFieldPoint_(int point)
             cout << Block::SPACE;
             break;
         case Unit::Falling:
-            Console::setColor(ColorManager::current);
+            Console::setColor(colorCurrentTetromino_);
             cout << Block::TETROMINO;
             break;
         case Unit::Fallen:
-            Console::setColor(ColorManager::previous);
+            Console::setColor(colorLastTetromino_);
             cout << Block::TETROMINO;
             break;
         }
@@ -84,15 +84,15 @@ void MainScene::drawFieldPoint_(int point)
 
 void MainScene::drawControl_() {
     string names[] = {
-    "CONTROL",
-    "s - down",
-    "a - left",
-    "d - right",
-    "space - rotate"
+        "CONTROL",
+        "s - down",
+        "a - left",
+        "d - right",
+        "space - rotate"
     };
     int y = 5, x = 24;
 
-    Console::setColor(ColorManager::Color::Yellow);
+    Console::setColor(Color::Yellow);
     for (int i = 0; i < 5; ++i) {
         Console::setCursorPos(x, y);
         cout << names[i];
@@ -103,6 +103,7 @@ void MainScene::drawControl_() {
 #pragma endregion
 
 void MainScene::processLogic_() {
+    
     vector<vector<vector<bool>>> figures = {
        Tetrominos::T,
        Tetrominos::Q,
@@ -115,16 +116,28 @@ void MainScene::processLogic_() {
        Tetrominos::X,
        Tetrominos::U,
     };
-    srand(time(0));
+
+    srand(unsigned(time(0)));
     Field gameField = Field(field_);
+
     while (!gameField.gameOver()) {
+        
         Tetromino figure = Tetromino(figures[rand() % figures.size()]);
+
+        colorCurrentTetromino_ = getRandomColor();
+
         while (!figure.isFallen()) {
-            figure.process_logic(field_);
             draw_();
-            Sleep(125);
+            figure.process_logic(field_);
+            Sleep(100);
         }
-        score_ += gameField.deleteFullLines();
+
+        colorLastTetromino_ = colorCurrentTetromino_;
+        
+        for (int i = 0; i < gameField.deleteFullLines(); ++i){
+            draw_();
+            score_ += 1;
+        }
     }
     Sleep(2000);
     flash_(3, 100);

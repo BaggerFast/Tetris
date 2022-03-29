@@ -1,8 +1,8 @@
 #include "Tetromino.h"
 #include <iostream>
 #include <conio.h>
-#include "ColorManager.h"
 #include "Constants.h"
+#include "Keyboard.h"
 
 
 vector<vector<bool>> Tetromino::getNextRotate()
@@ -22,13 +22,12 @@ Tetromino::Tetromino(vector<vector<bool>> figure, COORD coord)
 {
     figure_ = figure;
     coord_ = coord;
-    ColorManager::getRandom();
 }
 
 Tetromino::Tetromino(vector<vector<bool>> figure)
 {
     figure_ = figure;
-    srand(time(NULL));
+    srand(unsigned(time(0)));
     int rotate = rand() % 4;
     for (int i = 0; i < rotate; ++i) {
         figure_ = getNextRotate();
@@ -37,8 +36,6 @@ Tetromino::Tetromino(vector<vector<bool>> figure)
     if (coord_.X > 10-figure_[0].size()-1)
         coord_.X = 10 - figure_[0].size() - 1;
     coord_.Y = 0;
-    ColorManager::getRandom();
-
 }
 
 bool Tetromino::isFallen() { 
@@ -51,7 +48,6 @@ void Tetromino::fall(vector<vector<int>> &field) {
         isFallen_ = true;
         return;
     }
-    process_draw(field, Unit::Space);
     coord_.Y += 1;
 }  
 
@@ -100,6 +96,7 @@ void Tetromino::process_draw(vector<vector<int>>& field, int tag)
 }
 
 void Tetromino::process_logic(vector<vector<int>>& field) {
+    process_draw(field, Unit::Space);
     fall(field);
     if (_kbhit() && isFallen_ != true) {
         int key = _getch();
@@ -112,5 +109,5 @@ void Tetromino::process_logic(vector<vector<int>>& field) {
         else if (Keyboard::parseKeys(Keyboard::S, key) && checkInsert(coord_.X, coord_.Y + 1, field))
             coord_.Y += 1;
     }
-    process_draw(field, Unit::Falling);
+     process_draw(field, Unit::Falling);
 }

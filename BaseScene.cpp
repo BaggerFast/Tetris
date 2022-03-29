@@ -1,7 +1,6 @@
 #include "BaseScene.h"
 #include "Constants.h"
 #include "Console.h"
-#include "ColorManager.h"
 
 
 #pragma region Constructors
@@ -27,7 +26,7 @@ void BaseScene::draw_()
 
     Console::setCursorPos(coord_);
 
-    Console::setColor(ColorManager::Color::Green);
+    Console::setColor(Color::Green);
 
     for (int i = 0; i <= field_.size(); ++i)
         cout << Block::FIELD;
@@ -39,7 +38,7 @@ void BaseScene::draw_()
         for (int j = 0; j < field_[i].size(); ++j)
             drawFieldPoint_(field_[i][j]);
 
-        Console::setColor(ColorManager::Color::Green);
+        Console::setColor(Color::Green);
         cout << '\b' << Block::FIELD << endl;
     }
 

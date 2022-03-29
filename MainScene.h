@@ -1,5 +1,7 @@
 #pragma once
 #include "BaseScene.h"
+#include "Constants.h"
+
 
 class MainScene : public BaseScene
 {
@@ -8,6 +10,9 @@ class MainScene : public BaseScene
 
 private:
 	int score_ = 0;
+
+	int colorCurrentTetromino_ = Color::Black;
+	int colorLastTetromino_ = colorCurrentTetromino_;
 
 	void drawControl_();
 

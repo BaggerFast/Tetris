@@ -1,10 +1,9 @@
 #include "Field.h"
 #include "Console.h"
 #include <iostream>
-#include "ColorManager.h"
 #include "Constants.h"
 
-Field::Field(vector<vector<int>>& field) {
+Field::Field(vector<vector<int>> &field) {
     field_ = field;
 }
 
@@ -20,16 +19,16 @@ int Field::deleteFullLines()
             field_.insert(field_.cbegin(), emptyLine);
             Sleep(150);
             deleteLines += 1;
+            continue;
         }
-        else {
-            --y;
-        }
+        --y;
     }
     return deleteLines;
 }
 
 bool Field::gameOver()
 {
+    cout << field_[10].size();
     int count = 0;
     for (int i = 0; i < field_[0].size(); ++i)
         count += field_[0][i];

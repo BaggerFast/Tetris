@@ -89,10 +89,12 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>E:\Projects\C++\Tetris;E:\Projects\C++\Tetris\include;E:\Projects\C++\Tetris\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\Projects\C++\Tetris;E:\Projects\C++\Tetris\include;E:\Projects\C++\Tetris\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,10 +145,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseScene.cpp" />
-    <ClCompile Include="ColorManager.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Field.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="tetris.cpp" />
@@ -154,10 +156,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="ColorManager.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="Tetromino.h" />
