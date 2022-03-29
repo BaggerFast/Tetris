@@ -36,6 +36,17 @@ private:
 	/// <param name="Delay">Delay between flashing</param>
 	void flash_(int, int=100);
 
+	/// <summary>
+	/// Delete full lines in field
+	/// </summary>
+	void deleteFullLines_();
+
+	/// <summary>
+	/// Check game over
+	/// </summary>
+	/// <returns> true if the top line in the field is not empty</returns>
+	bool gameOver_();
+
 #pragma endregion
 
 #pragma region Public
@@ -53,4 +64,3 @@ public:
 #pragma endregion
 
 };
-

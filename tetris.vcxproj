@@ -147,7 +147,6 @@
     <ClCompile Include="src/BaseScene.cpp" />
     <ClCompile Include="src/Console.cpp" />
     <ClCompile Include="src/Constants.cpp" />
-    <ClCompile Include="src/Field.cpp" />
     <ClCompile Include="src/Keyboard.cpp" />
     <ClCompile Include="src/MainScene.cpp" />
     <ClCompile Include="src/MenuScene.cpp" />
@@ -158,7 +157,6 @@
     <ClInclude Include="include/BaseScene.h" />
     <ClInclude Include="include/Console.h" />
     <ClInclude Include="include/Constants.h" />
-    <ClInclude Include="include/Field.h" />
     <ClInclude Include="include/Keyboard.h" />
     <ClInclude Include="include/MainScene.h" />
     <ClInclude Include="include/MenuScene.h" />
