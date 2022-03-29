@@ -3,66 +3,9 @@
 #include "Field.h"
 #include "Console.h"
 
-using namespace std;
-
-struct Tetrominos {
-    static inline vector<vector<bool>>
-        T{
-            { 1, 1, 1 },
-            { 0, 1, 0 },
-        },
-        Q{
-            { 1, 1 },
-            { 1, 1 },
-        },
-        I{
-            { 1, },
-            { 1, },
-            { 1, },
-        },
-        Z{
-            { 1, 1, 0 },
-            { 0, 1, 1 },
-        },
-        S{
-            { 0, 1, 1 },
-            { 1, 1, 0 },
-        },
-        O{
-            { 1 },
-        },
-        J{
-            { 0, 1, },
-            { 0, 1, },
-            { 1, 1, },
-        },
-        L{
-            { 1, 0 },
-            { 1, 0 },
-            { 1, 1 },
-        },
-        X{
-            { 0, 1, 0 },
-            { 1, 1, 1 },
-            { 0, 1, 0 },
-        },
-        U{
-            { 1, 0, 1 },
-            { 1, 1, 1 },
-        };
-};
-
 #pragma region Private Methods
 
-#pragma region Draw Methods
-
-void MainScene::processDraw_()
-{
-    Console::setCursorPos(1, 0);
-    Console::setColor(Color::Yellow);
-    cout << "Score: " << score_;
-    Console::setCursorPos(coord_);
-}
+#pragma region Abstact Methods
 
 void MainScene::drawFieldPoint_(int point)
 {
@@ -84,13 +27,13 @@ void MainScene::drawFieldPoint_(int point)
 
 void MainScene::drawControl_() {
     string names[] = {
-        "CONTROL",
+        "CONTROL:",
         "s - down",
         "a - left",
         "d - right",
         "space - rotate"
     };
-    int y = 5, x = 24;
+    int y = 4, x = 24;
 
     Console::setColor(Color::Yellow);
     for (int i = 0; i < 5; ++i) {
@@ -100,26 +43,27 @@ void MainScene::drawControl_() {
     }
 }
 
-#pragma endregion
-
 void MainScene::processLogic_() {
     
     vector<vector<vector<bool>>> figures = {
-       Tetrominos::T,
-       Tetrominos::Q,
-       Tetrominos::I,
-       Tetrominos::Z,
-       Tetrominos::S,
-       Tetrominos::O,
-       Tetrominos::J,
-       Tetrominos::L,
-       Tetrominos::X,
-       Tetrominos::U,
+       Tetrominoes::T,
+       Tetrominoes::Q,
+       Tetrominoes::I,
+       Tetrominoes::Z,
+       Tetrominoes::S,
+       Tetrominoes::O,
+       Tetrominoes::J,
+       Tetrominoes::L,
+       Tetrominoes::X,
+       Tetrominoes::U,
     };
 
     srand(unsigned(time(0)));
-    Field gameField = Field(field_);
-
+    
+    Field gameField = Field(&field_);
+    
+    drawScore_();
+    
     while (!gameField.gameOver()) {
         
         Tetromino figure = Tetromino(figures[rand() % figures.size()]);
@@ -127,7 +71,7 @@ void MainScene::processLogic_() {
         colorCurrentTetromino_ = getRandomColor();
 
         while (!figure.isFallen()) {
-            draw_();
+            drawField_();
             figure.process_logic(field_);
             Sleep(100);
         }
@@ -135,20 +79,32 @@ void MainScene::processLogic_() {
         colorLastTetromino_ = colorCurrentTetromino_;
         
         for (int i = 0; i < gameField.deleteFullLines(); ++i){
-            draw_();
             score_ += 1;
+            drawScore_();
+            drawField_();
         }
     }
+    drawField_();
     Sleep(2000);
     flash_(3, 100);
 }
 
-void MainScene::flash_(int count, int timer) {
+#pragma endregion
+
+void MainScene::drawScore_()
+{
+    Console::setCursorPos(1, 0);
+    Console::setColor(Color::Yellow);
+    cout << "Score: " << score_;
+    Console::setCursorPos(coord_);
+}
+
+void MainScene::flash_(int count, int delay) {
     for (int i = 0; i < count; i++) {
         system("color 20");
-        Sleep(timer);
+        Sleep(delay);
         system("color 02");
-        Sleep(timer);
+        Sleep(delay);
     }
 }
 

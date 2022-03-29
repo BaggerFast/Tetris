@@ -15,31 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Field.cpp">
+    <ClCompile Include="src/Field.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
+    <ClCompile Include="src/Console.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Tetromino.cpp">
+    <ClCompile Include="src/Tetromino.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="tetris.cpp">
+    <ClCompile Include="src/tetris.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="BaseScene.cpp">
+    <ClCompile Include="src/BaseScene.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="MainScene.cpp">
+    <ClCompile Include="src/MainScene.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="MenuScene.cpp">
+    <ClCompile Include="src/MenuScene.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
+    <ClCompile Include="src/Keyboard.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Constants.cpp">
+    <ClCompile Include="src/Constants.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

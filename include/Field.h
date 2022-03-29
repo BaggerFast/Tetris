@@ -15,7 +15,7 @@ private:
 
     bool gameOver_ = false;
 
-    vector<vector<int>> field_;
+    vector<vector<int>> *field_;
     
 #pragma endregion
 
@@ -23,7 +23,7 @@ private:
 
 public:
 
-    Field(vector<vector<int>> &);
+    Field(vector<vector<int>> *);
 
     void processLogic();
 

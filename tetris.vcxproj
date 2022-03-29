@@ -144,25 +144,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseScene.cpp" />
-    <ClCompile Include="Console.cpp" />
-    <ClCompile Include="Constants.cpp" />
-    <ClCompile Include="Field.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="MainScene.cpp" />
-    <ClCompile Include="MenuScene.cpp" />
-    <ClCompile Include="tetris.cpp" />
-    <ClCompile Include="Tetromino.cpp" />
+    <ClCompile Include="src/BaseScene.cpp" />
+    <ClCompile Include="src/Console.cpp" />
+    <ClCompile Include="src/Constants.cpp" />
+    <ClCompile Include="src/Field.cpp" />
+    <ClCompile Include="src/Keyboard.cpp" />
+    <ClCompile Include="src/MainScene.cpp" />
+    <ClCompile Include="src/MenuScene.cpp" />
+    <ClCompile Include="src/tetris.cpp" />
+    <ClCompile Include="src/Tetromino.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="Console.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="Field.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="MainScene.h" />
-    <ClInclude Include="MenuScene.h" />
-    <ClInclude Include="Tetromino.h" />
+    <ClInclude Include="include/BaseScene.h" />
+    <ClInclude Include="include/Console.h" />
+    <ClInclude Include="include/Constants.h" />
+    <ClInclude Include="include/Field.h" />
+    <ClInclude Include="include/Keyboard.h" />
+    <ClInclude Include="include/MainScene.h" />
+    <ClInclude Include="include/MenuScene.h" />
+    <ClInclude Include="include/Tetromino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

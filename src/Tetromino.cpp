@@ -1,6 +1,7 @@
-#include "Tetromino.h"
 #include <iostream>
 #include <conio.h>
+
+#include "Tetromino.h"
 #include "Constants.h"
 #include "Keyboard.h"
 
@@ -29,9 +30,8 @@ Tetromino::Tetromino(vector<vector<bool>> figure)
     figure_ = figure;
     srand(unsigned(time(0)));
     int rotate = rand() % 4;
-    for (int i = 0; i < rotate; ++i) {
+    for (int i = 0; i < rotate; ++i)
         figure_ = getNextRotate();
-    }
     coord_.X = rand() % 11;
     if (coord_.X > 10-figure_[0].size()-1)
         coord_.X = 10 - figure_[0].size() - 1;
@@ -60,8 +60,8 @@ void Tetromino::rotate(vector<vector<int>> & field)
         figure_ = tmp;   
 }
 
-bool Tetromino::checkInsert(int x, int y, vector<vector<int>> & field)
-{   
+bool Tetromino::checkInsert(int x, int y, vector<vector<int>>& field)
+{
     int tmpY = y;
     for (int y = 0; y < figure_.size(); ++y) {
         int tmpX = x;
@@ -69,7 +69,7 @@ bool Tetromino::checkInsert(int x, int y, vector<vector<int>> & field)
             try {
                 if (field.at(tmpY).at(tmpX) == Unit::Fallen && figure_[y][x] == Unit::Falling) {
                     return false;
-                }                  
+                }
             }
             catch (out_of_range) {
                 return false;
@@ -95,7 +95,7 @@ void Tetromino::process_draw(vector<vector<int>>& field, int tag)
     }
 }
 
-void Tetromino::process_logic(vector<vector<int>>& field) {
+void Tetromino::process_logic(vector<vector<int>> &field) {
     process_draw(field, Unit::Space);
     fall(field);
     if (_kbhit() && isFallen_ != true) {

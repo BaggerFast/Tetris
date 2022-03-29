@@ -1,8 +1,6 @@
 #pragma once
 #include <windows.h>
 
-using namespace std;
-
 /// <summary>
 /// Class for working with the windows console
 /// </summary>

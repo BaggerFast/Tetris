@@ -14,15 +14,27 @@ private:
 	int colorCurrentTetromino_ = Color::Black;
 	int colorLastTetromino_ = colorCurrentTetromino_;
 
+	#pragma region Abstact
+	
 	void drawControl_();
 
 	void drawFieldPoint_(int);
 
-	void processDraw_();
-
 	void processLogic_();
+	
+#pragma endregion
 
-	void flash_(int, int);
+	/// <summary>
+	/// Display score count
+	/// </summary>
+	void drawScore_();
+
+	/// <summary>
+	/// Black and green flashing in console
+	/// </summary>
+	/// <param name="count">Number of repetitions</param>
+	/// <param name="Delay">Delay between flashing</param>
+	void flash_(int, int=100);
 
 #pragma endregion
 

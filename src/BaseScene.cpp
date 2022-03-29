@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include "Console.h"
 
+using namespace std;
 
 #pragma region Constructors
 
@@ -20,10 +21,8 @@ BaseScene::BaseScene(int width, int height, COORD coord) {
 
 #pragma region Private Methods
 
-void BaseScene::draw_()
+void BaseScene::drawField_()
 {
-    processDraw_();
-
     Console::setCursorPos(coord_);
 
     Console::setColor(Color::Green);
@@ -45,6 +44,20 @@ void BaseScene::draw_()
     for (int i = 0; i <= field_.size(); ++i)
         cout << Block::FIELD;
     cout << endl;
+}
+
+void BaseScene::insertVectorIntoField_(vector<vector<bool>> vec, int x, int y, int unit)
+{
+    int tmpY = y;
+    for (int y = 0; y < vec.size(); ++y) {
+        int tmpX = x;
+        for (int x = 0; x < vec[y].size(); ++x) {
+            if (vec[y][x])
+                field_[tmpY][tmpX] = unit;
+            tmpX++;
+        }
+        tmpY++;
+    }
 }
 
 #pragma endregion
