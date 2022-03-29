@@ -18,7 +18,7 @@ Tetromino::Tetromino(vector<vector<bool>> figure, int fieldWidth)
     for (int i = 0; i < rotate; ++i)
         figure_ = getNextRotate_();
     
-    coord_.X = rand() % fieldWidth+1;
+    coord_.X = rand() % fieldWidth;
     if (coord_.X > fieldWidth - figure_[0].size() - 1)
         coord_.X = fieldWidth - figure_[0].size() - 1;
     

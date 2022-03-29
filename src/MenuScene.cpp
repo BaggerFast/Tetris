@@ -11,13 +11,11 @@
 MenuScene::MenuScene(int width, int height, int x, int y) : BaseScene(width, height, x, y) {
     cursorCoord_.X = 1;
     cursorCoord_.Y = 7;
-    field_[cursorCoord_.Y][cursorCoord_.X] = Block::CURSOR;
 };
 
 MenuScene::MenuScene(int width, int height, COORD coord) : BaseScene(width, height, coord) {
     cursorCoord_.X = 1;
     cursorCoord_.Y = 7;
-    field_[cursorCoord_.Y][cursorCoord_.X] = Block::CURSOR;
 };
 
 #pragma endregion
@@ -73,6 +71,8 @@ void MenuScene::processLogic_()
     insertWordIntoField_("EXIT", 2, 9);
     insertTitleIntoField_();
     insertStairsIntoField_();
+
+    field_[cursorCoord_.Y][cursorCoord_.X] = Block::CURSOR;
 
     while (!exit_) {
         parseKeyboard_();
