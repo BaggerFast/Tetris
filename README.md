@@ -1,5 +1,8 @@
 # Project Tetris
 
+[![Language](https://img.shields.io/badge/Language-C++-blue.svg?style=flat)]()
+[![Platform](https://img.shields.io/badge/Platform-Windows-red.svg?style=flat)]()
+
 ### The purpose of project:
 Make a copy of the tetris game in the Windows Console without using third-party libraries
 
